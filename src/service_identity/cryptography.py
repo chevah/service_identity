@@ -13,6 +13,7 @@ try:
     from cryptography.x509.extensions import ExtensionNotFound
 except ImportError:
     ExtensionNotFound = None
+    ObjectIdentifier = str
 
 from pyasn1.codec.der.decoder import decode
 from pyasn1.type.char import IA5String
