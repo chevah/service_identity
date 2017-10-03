@@ -357,6 +357,9 @@ def _hostname_matches(cert_pattern, actual_hostname):
     :rtype: `bool`
     """
     if b'*' in cert_pattern:
+        if '.' not in actual_hostname:
+            return False
+
         cert_head, cert_tail = cert_pattern.split(b".", 1)
         actual_head, actual_tail = actual_hostname.split(b".", 1)
         if cert_tail != actual_tail:

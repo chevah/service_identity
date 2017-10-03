@@ -6,10 +6,14 @@ from __future__ import absolute_import, division, print_function
 
 import warnings
 
-from cryptography.x509 import (
-    DNSName, ExtensionOID, NameOID, OtherName, UniformResourceIdentifier,
-    ObjectIdentifier)
-from cryptography.x509.extensions import ExtensionNotFound
+try:
+    from cryptography.x509 import (
+        DNSName, ExtensionOID, NameOID, OtherName, UniformResourceIdentifier,
+        ObjectIdentifier)
+    from cryptography.x509.extensions import ExtensionNotFound
+except ImportError:
+    ExtensionNotFound = None
+
 from pyasn1.codec.der.decoder import decode
 from pyasn1.type.char import IA5String
 
@@ -70,6 +74,9 @@ def extract_ids(cert):
 
     :return: List of IDs.
     """
+    if ExtensionNotFound is None:
+        raise CertificateError("cryptography not supported")
+
     ids = []
     try:
         ext = cert.extensions.get_extension_for_oid(

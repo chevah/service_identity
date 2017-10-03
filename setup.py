@@ -98,7 +98,7 @@ if __name__ == "__main__":
         description=find_meta("description"),
         license=find_meta("license"),
         url=URI,
-        version=find_meta("version"),
+        version=find_meta("version") + '.chevah1',
         author=find_meta("author"),
         author_email=find_meta("email"),
         maintainer=find_meta("author"),
